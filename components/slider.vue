@@ -10,7 +10,7 @@
             	<img v-else :src="item.picUrl">
             </li>
         </ul>
-        <div class="pagination" v-if="showPage">
+        <div class="pagination" v-if="pagination">
             <i v-for="item in itemsLength" :class="{on:(current === $index) || (itemsLength === 2 && current%itemsLength === $index)}">{{$index+1}}</i>
         </div>
     </div>
@@ -33,6 +33,10 @@ module.exports = {
             - 可通过props :speed="5000" 修改间隔
 	*/
 	props:{
+        sync:{
+            type:Boolean,
+            default: false//传入数据是否为同步？
+        },
         items:{
             type:Array
         },
@@ -61,8 +65,6 @@ module.exports = {
             startTime:undefined,//记录手指按下时间
             startX:undefined,//手指按下的坐标
             offsetX:0,//手指偏移量
-            isAutoPlay:true,//是否自动播放
-            showPage:true,//是否显示页码
             timer:null//计数器
         }
     },
@@ -86,21 +88,20 @@ module.exports = {
         }
     },
     ready:function(){
-        // 初始化
-        this.init();
-        // 如果items变化，重新初始化
-        this.$watch('items',function(){
-            this.init();
-        });
+        if(this.sync){
+            this.init(); // 如果为同步数据，则直接初始化
+        }else{
+            this.$watch('items',function(){
+                this.init(); // 如果为ajax异步返回数据，则监控items更改后在初始化
+            });
+        } 
     },
     methods:{
         init:function(){
             // 如果仅有一个滑块，则只渲染dom，不使用滑块其他功能
             if(this.itemsLength < 2){
-                this.isAutoPlay = this.showPage = false;
+                this.autoPlay = this.pagination = false;
             }else{
-                this.isAutoPlay = this.autoPlay;
-                this.showPage = this.pagination;
                 this.itemsDomLength = this.itemsLength === 2 ? 4 : this.itemsLength;
                 this.prev = this.itemsDomLength - 1; //重置上滑块索引
                 this.sliedrWrap = this.$el.getElementsByTagName('ul')[0];//保存滑块容器dom对象

@@ -20,6 +20,12 @@ Vue的移动端Slider组件。无依赖，功能单一，只有左右滑动功�
 - `pagination` `boolean` 是否显示页码标记？默认为 true；
 - `auto-play` `boolean` 是否自动播放？默认为 true；
 - `speed` `number` 自动播放时间间隔，默认3000，单位毫秒；
+- `sync` `boolean` 传入数据是否为同步的？默认为 false，（ajax返回再传入的为异步）；
+
+**`sync` 属性说明**
+
+- 如果用于构造滑动组件的数据是ajax请求后返回的，因为收到返回数据可能在组件内ready事件只能之后，所以此时组件内需要watch数据变化后再初始化
+- 如果数据是已经准备好的，则在组件ready时直接初始化，此种情况，请务必在使用组件时，增加 `:sync="true"` 属性，使其直接初始化。
 
 **`items` 数组默认结构**
 
@@ -34,5 +40,5 @@ var picList = [
 **完整的调用示例**
 
 ```html
-<slider :items="picList" :pagination="true" :auto-play="true" :speed="1000"></slider>
+<slider :items="picList" :pagination="true" :auto-play="true" :speed="1000" :sync="true"></slider>
 ```
