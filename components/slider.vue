@@ -10,7 +10,7 @@
             	<img v-else :src="item.picUrl">
             </li>
         </ul>
-        <div class="pagination" v-if="pagination">
+        <div class="pagination" v-if="showPage">
             <i v-for="item in itemsLength" :class="{on:(current === $index) || (itemsLength === 2 && current%itemsLength === $index)}">{{$index+1}}</i>
         </div>
     </div>
@@ -51,11 +51,9 @@ module.exports = {
     },
     data:function(){
         return {
-            itemsForDom:null,// 用于渲染的滑块单元数组
             scaleW:window.innerWidth,//页面宽度
             sliedrWrap:null,//滑块容器dom对象
             itemsDom:null,//滑动单元dom对象数组
-            itemsLength:undefined,//滑块数量（传入的）
             itemsDomLength:undefined,//滑块数量（渲染后的）
             current:0,//当前滑块索引
             prev:undefined,//上滑块索引
@@ -63,31 +61,54 @@ module.exports = {
             startTime:undefined,//记录手指按下时间
             startX:undefined,//手指按下的坐标
             offsetX:0,//手指偏移量
+            isAutoPlay:true,//是否自动播放
+            showPage:true,//是否显示页码
             timer:null//计数器
         }
     },
-    ready:function(){
-        this.itemsForDom = this.items;//默认情况下用于渲染的滑块数组 === 传入的滑块数组
-        this.itemsLength = this.items.length;//重置滑块数量
-        // 如果仅有一个滑块，则只渲染dom，不使用滑块其他功能
-        if(this.itemsLength < 2){
-            this.pagination = this.autoPlay = false;
-        }else{
-            this.itemsDomLength = this.itemsLength === 2 ? 4 : this.itemsLength;
-            this.prev = this.itemsDomLength - 1; //重置上滑块索引
-            // 如果只传入滑块数量为2，再复制一份用于渲染
-            if(this.itemsLength === 2){
-                for(var i=0;i<2;i++){
-                    this.itemsForDom.push(this.items[i]);
+    computed:{
+        itemsForDom:function(){
+            // 用于渲染的滑块单元数组
+            //默认情况下用于渲染的滑块数组 === 传入的滑块数组
+            var tmp = [];
+            if(this.items.length === 2){
+                for(var i=0;i<4;i++){
+                    tmp.push(this.items[i%2]);
                 }
+                return tmp;
+            }else{
+                return this.items;
             }
-            this.sliedrWrap = this.$el.getElementsByTagName('ul')[0];//保存滑块容器dom对象
-            this.itemsDom = this.sliedrWrap.getElementsByTagName('li');//保存滑块单元dom对象数组
-            this.addListener();// 在滑块容器上监听事件
-            this.autoPlay ? this.play(true) : '';// 自动播放
+        },
+        itemsLength:function(){
+            //计算滑块数量（传入的）
+            return this.items.length;
         }
     },
+    ready:function(){
+        // 初始化
+        this.init();
+        // 如果items变化，重新初始化
+        this.$watch('items',function(){
+            this.init();
+        });
+    },
     methods:{
+        init:function(){
+            // 如果仅有一个滑块，则只渲染dom，不使用滑块其他功能
+            if(this.itemsLength < 2){
+                this.isAutoPlay = this.showPage = false;
+            }else{
+                this.isAutoPlay = this.autoPlay;
+                this.showPage = this.pagination;
+                this.itemsDomLength = this.itemsLength === 2 ? 4 : this.itemsLength;
+                this.prev = this.itemsDomLength - 1; //重置上滑块索引
+                this.sliedrWrap = this.$el.getElementsByTagName('ul')[0];//保存滑块容器dom对象
+                this.itemsDom = this.sliedrWrap.getElementsByTagName('li');//保存滑块单元dom对象数组
+                this.addListener();// 在滑块容器上监听事件
+                this.autoPlay ? this.play(true) : '';// 自动播放
+            }
+        },
         goIndex:function(orientation){
             /*  过渡方法：
                 orientation 只接收字符串 '+1'、'-1'、'0'
