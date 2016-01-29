@@ -1,6 +1,6 @@
 #vue-onlySlider-x
 
-Vue的移动端Slider组件
+Vue的移动端Slider组件。无依赖，功能单一，只有左右滑动功能。如果你需要的仅仅是一个banner，那你可能需要它！
 
 ## 测试
 
