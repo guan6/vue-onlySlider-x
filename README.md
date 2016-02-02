@@ -2,6 +2,8 @@
 
 Vue的移动端Slider组件。无依赖，功能单一，只有左右滑动功能。如果你需要的仅仅是一个banner，那你可能需要它！
 
+[查看DEMO](http://guan6.github.io/vue-onlySlider-x/)
+
 ## 测试
 
 运行 `npm install`，来安装所需的依赖模块。
