@@ -271,8 +271,8 @@ module.exports = {
             bottom:.8em;
             i{
                 display: inline-block;
-                width: .5em;
-                height: .5em;
+                width: .2rem;
+                height: .2rem;
                 overflow: hidden;
                 border-radius: 20px;
                 background: #fff;
