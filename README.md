@@ -4,6 +4,17 @@ Vue的移动端Slider组件。无依赖，功能单一，只有左右滑动功�
 
 [DEMO 在移动端调试器或移动设备中查看](http://guan6.github.io/vue-onlySlider-x/)
 
+或扫描下面二维码：
+
+![vue-onlySlider-x 二维码](http://guan6.github.io/vue-onlySlider-x/img/code.png)
+
+## 更新历史
+2016-02-03 - 修复微信浏览器touchmove不连续触发问题，链接无法点击问题；
+
+## 未解决的问题
+iphone6 中的微信浏览器，Transition失效，过渡无动画...你知道为什么吗？tell me （QQ:405171253）
+
+
 ## 测试
 
 运行 `npm install`，来安装所需的依赖模块。

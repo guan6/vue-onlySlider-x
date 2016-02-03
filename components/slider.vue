@@ -121,7 +121,7 @@ module.exports = {
                 _prev = this.prev,
                 _next = this.next,
                 _cidx = 0,
-                _time = 0.2; // 过渡动画时长
+                _time = 300; // 过渡动画时长
             if(typeof orientation == 'string'){
                 _cidx = _current + orientation*1;
             }
@@ -161,6 +161,8 @@ module.exports = {
             /*  
                 手指按下时触发的方法
             */
+            //修复微信内置浏览器对touchmove不连续触发的问题
+            /^(?:INPUT|TEXTAREA|A|IMG)$/.test(evt.target.tagName) || evt.preventDefault();
             this.autoPlay ? this.play(false) : '';// 暂停自动播放
             this.startTime = new Date() * 1;//记录手指按下的时间
             this.startX = evt.touches[0].pageX;//记录手指按下的坐标
@@ -181,7 +183,6 @@ module.exports = {
             /*  
                 手指离开时触发方法
             */
-            evt.preventDefault(); // 阻止浏览器默认行为
             this.autoPlay ? this.play(true) : ''; // 手指离开后重新开始自动播放
 
             var _boundary = this.scaleW/6,// 边界就翻页值
@@ -227,8 +228,8 @@ module.exports = {
                 time 过渡时间
                 target 目标位置
             */
-            obj.style.transition = 'transform '+time+'s ease-out';
-            obj.style.transform = 'translate3d('+ target +'px, 0, 0)';
+            obj.style.WebkitTransitionDuration = time+'ms';
+            obj.style.WebkitTransform = 'translate3d('+ target +'px, 0, 0)';
         },
         addListener:function(){
             // 添加事件监听
@@ -242,9 +243,16 @@ module.exports = {
 
 <style lang="sass">
     .slider{
+        width: 100%;
         height: 4rem;
         position: relative;
         text-align: center;
+        overflow: hidden;
+        ul{
+            width: 100%;
+            height: 4rem;
+            overflow: hidden;
+        }
         li{
             position: absolute;
         }
