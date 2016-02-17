@@ -9,16 +9,12 @@ Vue的移动端Slider组件。无依赖，功能单一，只有左右滑动功�
 ![vue-onlySlider-x 二维码](http://guan6.github.io/vue-onlySlider-x/img/code.png)
 
 ## 更新历史
+
 2016-02-03 - 修复微信浏览器touchmove不连续触发问题，链接无法点击问题；
 
 2016-02-17 - 禁止长按图片和链接弹出菜单；
 
 2016-02-17 - 修复一处可能导致该模块无法找到的错误；
-
-## 未解决的问题
-微信6.3.10 for ios，Transition失效，过渡无动画...你知道为什么吗？tell me （QQ:405171253）
-
-- 最新版本没有问题...
 
 
 ## 测试
@@ -61,3 +57,7 @@ var picList = [
 ```html
 <slider :items="picList" :pagination="true" :auto-play="true" :speed="1000" :sync="true"></slider>
 ```
+
+## 联系我
+
+有问题？tell me （QQ:405171253）
