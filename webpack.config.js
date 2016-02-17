@@ -29,7 +29,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loader: ExtractTextPlugin.extract(
-                  "style-loader", 'css-loader?sourceMap!sass-loader!cssnext-loader')
+                  "style-loader", 'css-loader?sass-loader!cssnext-loader')
             }
         ]
     },

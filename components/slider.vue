@@ -161,8 +161,6 @@ module.exports = {
             /*  
                 手指按下时触发的方法
             */
-            //修复微信内置浏览器对touchmove不连续触发的问题
-            /^(?:INPUT|TEXTAREA|A|IMG)$/.test(evt.target.tagName) || evt.preventDefault();
             this.autoPlay ? this.play(false) : '';// 暂停自动播放
             this.startTime = new Date() * 1;//记录手指按下的时间
             this.startX = evt.touches[0].pageX;//记录手指按下的坐标
@@ -172,7 +170,7 @@ module.exports = {
             /*  
                 手指拖动时触发方法
             */
-            evt.preventDefault(); //兼容chrome android，阻止浏览器默认行为
+            evt.preventDefault(); //兼容chrome android，阻止浏览器默认行为，修复安卓中微信内置浏览器touchmove不连续触发问题
             this.offsetX = evt.targetTouches[0].pageX - this.startX;//计算手指的偏移量
             // 手指滑动时改变图片位置
             this.setTrans(this.itemsDom[this.current], 0, this.offsetX);
@@ -255,6 +253,9 @@ module.exports = {
         }
         li{
             position: absolute;
+        }
+        a,img{
+            -webkit-touch-callout: none;//禁止长按链接和图片出现菜单
         }
         a{
             display: block;
