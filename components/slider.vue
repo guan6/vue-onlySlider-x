@@ -7,7 +7,7 @@
                 transform:'translate3d('+$index*scaleW+'px, 0, 0)'
             }">
             	<a v-if="item.href" :href="item.href"><img :src="item.picUrl" alt=""></a>
-            	<img v-else :src="item.picUrl">
+                <a v-else><img :src="item.picUrl"></a>
             </li>
         </ul>
         <div class="pagination" v-if="pagination">
