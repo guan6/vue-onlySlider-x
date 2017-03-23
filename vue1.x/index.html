@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <title>vue-onlySlider-x</title>
+        <script src="flexible.js"></script>
+        <style>
+            *{
+                padding:0;
+                margin:0;
+            }
+            html{
+                outline:none;
+                -webkit-text-size-adjust: none;
+                -webkit-tap-highlight-color:rgba(0,0,0,0);
+            }
+            html,body{
+                width: 100%;
+                height: 100%;
+            }
+            ul,li{
+                list-style: none;
+            }
+            .clearfix:after{
+                content: ' ';
+                display: block;
+                height: 0;
+                overflow: hidden;
+                clear: both;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="Slider">
+            <slider :items="pics" :sync="true"></slider>
+        </div>
+        <script src="dist/build.js"></script>
+    </body>
+</html>
