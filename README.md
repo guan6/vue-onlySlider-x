@@ -1,4 +1,4 @@
-#vue-onlySlider-x#
+## vue-onlySlider-x
 
 - **内含支持`vue1`和`vue2`版本的组件各一个**
 - **默认是vue2的组件，vue1的组件相关文件，都放在 `vue1.x`目录中**
