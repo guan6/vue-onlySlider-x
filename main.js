@@ -6,7 +6,7 @@ import Slider from './components/slider.vue'
 let imgs = [
   {href:'',src:'img/1.png'},
   {src:'img/2.png'},
-  {href:'https://cn.vuejs.org/',src:'img/3.png'}
+	{href:'https://cn.vuejs.org/',src:'img/3.png'}
 ]
 
 // 创建实例

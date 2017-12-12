@@ -11,16 +11,6 @@ Vue的移动端Slider组件。无依赖、功能单一，只有左右滑动功�
 
 ![vue-onlySlider-x 二维码](http://guan6.github.io/vue-onlySlider-x/img/code.png)
 
-## 更新历史
-
-2017-03-23 - 增加一个支持`vue2`的版本；
-
-2016-02-17 - 禁止长按图片和链接弹出菜单；
-
-2016-02-17 - 修复一处可能导致该模块无法找到的错误；
-
-2016-02-03 - 修复微信浏览器touchmove不连续触发问题，链接无法点击问题；
-
 ## 测试
 
 运行 `npm install`，来安装所需的依赖模块。
@@ -41,10 +31,17 @@ Vue的移动端Slider组件。无依赖、功能单一，只有左右滑动功�
 - `speed` `Number` 自动播放时间间隔，默认3000，单位毫秒；
 - `sync` `Boolean` 传入数据是否为同步的？默认为 false，（ajax返回再传入的视作异步）；
 
-*VUE2的组件 新增两个参数，都为必选*
+*VUE2的组件 新增参数*
 
-- `width` `Number` 单图片真实宽度(单位px，必选)；
-- `height` `Number` 单图片真实高度(单位px，必选)；
+- `source-width` `Number` 单图片真实宽度(单位px，必选)；
+- `source-height` `Number` 单图片真实高度(单位px，必选)；
+- `loop` `Boolean` 循环播放；
+- `viewport-ratio` `Number` 图片宽度百分比（与屏幕宽）；
+- `anims` `String` 切换动画（需要动态改变的属性值格式如下）；
+    - `{"id":0,"min":0.2,"max":1}`
+        - `id` 属性值标记
+        - `min` 属性最小值
+        - `max` 属性最大值
 
 **`sync` 属性说明**
 
@@ -76,7 +73,7 @@ var imgs = [
 <slider :items="imgs" :pagination="true" :auto-play="true" :speed="1000" :sync="true"></slider>
 
 <!-- vue2 -->
-<slider :items="imgs" :width="750" :height="300" :pagination="true" :auto-play="true" :speed="1000" :sync="true"></slider>
+<slider :items="imgs" :source-width="750" :source-height="300" :loop="true" :viewport-ratio="80" :sync="true" anims='opacity:{"id":0,"min":0.2,"max":1};transform:scale({"id":1,"min":0.85,"max":1})'></slider>
 ```
 
 
