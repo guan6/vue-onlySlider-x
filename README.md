@@ -73,7 +73,16 @@ var imgs = [
 <slider :items="imgs" :pagination="true" :auto-play="true" :speed="1000" :sync="true"></slider>
 
 <!-- vue2 -->
-<slider :items="imgs" :source-width="750" :source-height="300" :loop="true" :viewport-ratio="80" :sync="true" anims='opacity:{"id":0,"min":0.2,"max":1};transform:scale({"id":1,"min":0.85,"max":1})'></slider>
+<slider
+    :items="imgs"
+    :source-width="750"
+    :source-height="300"
+    :loop="true"
+    :viewport-ratio="80"
+    :sync="true"
+    anims='opacity:{"id":0,"min":0.2,"max":1};transform:scale({"id":1,"min":0.85,"max":1})'
+>
+</slider>
 ```
 
 
